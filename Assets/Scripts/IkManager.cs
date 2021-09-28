@@ -9,7 +9,7 @@ public class IkManager : MonoBehaviour
     public MJoint m_root;
     public GameObject m_target;
     float threshold = 0.001f;
-    float vel = 5;
+    float vel = 10;
 
     float CalculateDistance(Vector3 p1, Vector3 p2){
         return Vector3.Distance(p1, p2);
