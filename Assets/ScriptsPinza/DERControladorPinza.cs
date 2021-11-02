@@ -6,38 +6,43 @@ public class DERControladorPinza : MonoBehaviour
 {
 
     float Rotacion;
-    int limCerrar= 359;
-    int limAbrir = 11;
+    public TopeAbajo topeAbajo;
+    public IZQControladorPinza controlIZQ;
+    
+    float vel = 0.5f;
 
 
     void Pinza(float vel){
-        Rotacion = transform.eulerAngles.z;
 
-        if((Rotacion< limAbrir ||  Rotacion>limCerrar))
-        {
-            if(Input.GetKey("down")){
-                Rotacion += -vel;            
+        // if((Rotacion< limAbrir ||  Rotacion>limCerrar))
+        // {
+            if(Input.GetKey("down") && (topeAbajo.topeDown == false)){
+                transform.Rotate(Vector3.forward * -vel);          
             }
           
-            if(Input.GetKey("up")){               
-               Rotacion += vel;
+            if(Input.GetKey("up") && (controlIZQ.topeUp == false)){               
+               transform.Rotate(Vector3.forward * vel);
                 
             }
-        }
-        else if(Rotacion >=limAbrir && Rotacion < 180){
-            Rotacion = 10.9f;
-        }
-        else if(Rotacion <=limCerrar && Rotacion > 180){
-            Rotacion = 359.1f;
-        }
+        // }
+        // else if(Rotacion >=limAbrir && Rotacion < 180){
+        //     Rotacion = 10.9f;
+        // }
+        // else if(Rotacion <=limCerrar && Rotacion > 180){
+        //     Rotacion = 359.1f;
+        // }
         //Actualizacion de posicion (esta linea mueve todo, lo anterior suma a la posicion y aqui se actualiza)
-        transform.rotation = Quaternion.Euler(0f,0f,Rotacion);
+        //transform.rotation = Quaternion.Euler(0f,0f,Rotacion);
     }
     
-    float vel = 0.1f;
-    // Update is called once per frame
+    
+           
+    
     void Update()
     {
         Pinza(vel);
+        //Debug.Log("tope arriba" + topeAbajo.topeDown);
+        //Debug.Log(transform.eulerAngles.z);
+        
     }
 }
